@@ -16,6 +16,20 @@ export const getDetailLayanan = async (req, res) => {
     }
 };
 
+export const getFilePDF = async (req, res) => {
+    try {
+      const detail = await DetailLayanan.findByPk(req.params.id_detail);
+      if (!detail) return res.status(404).send("Not found");
+  
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'inline; filename=document.pdf');
+      res.send(detail.file); 
+    } catch (err) {
+      res.status(500).send("Error loading file");
+    }
+  };
+  
+
 export const getDetailLayananById = async (req, res) => {
     try {
         const detail = await DetailLayanan.findOne({
