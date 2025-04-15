@@ -18,6 +18,9 @@ const DetailLayanan = db.define('tb_detail_layanan', {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE' 
     },
+    judul: {
+        type: DataTypes.STRING, 
+    },
     file: {
         type: DataTypes.BLOB('long'), 
     },
