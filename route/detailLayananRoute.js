@@ -9,7 +9,7 @@ import express from 'express'
 
 const route = express.Router()
 
-route.get('/detail', getDetailLayanan)
+route.get('/detail-layanan/:id', getDetailLayanan)
 route.get('/detail/:id', getDetailLayananById)
 route.post('/detail', uploadImage, createDetailLayanan)
 route.patch('/detail/:id', uploadImage, createDetailLayanan)

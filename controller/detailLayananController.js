@@ -6,7 +6,9 @@ export const uploadImage = multer({ storage }).single("file");
 
 export const getDetailLayanan = async (req, res) => {
     try {
-        const response = await DetailLayanan.findAll();
+        const response = await DetailLayanan.findAll({
+            where : {id_layanan: req.params.id }
+        });
         res.status(200).json(response);
     } catch (error) {
         console.log(error.message);
