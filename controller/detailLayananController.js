@@ -46,10 +46,10 @@ export const createDetailLayanan = async (req, res) => {
             return res.status(400).json({ msg: "File PDF wajib diunggah" });
         }
 
-        const { id_layanan } = req.body;
+        const { judul } = req.body;
 
         await DetailLayanan.create({
-            id_layanan: id_layanan,
+            judul: judul,
             file: req.file.filename, 
         });
 
