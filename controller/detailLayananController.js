@@ -17,17 +17,19 @@ export const getDetailLayanan = async (req, res) => {
 };
 
 export const getFilePDF = async (req, res) => {
-    try {
-      const detail = await DetailLayanan.findByPk(req.params.id);
-      if (!detail) return res.status(404).send("Not found");
-  
-      res.setHeader('Content-Type', 'application/pdf');
-      res.setHeader('Content-Disposition', 'inline; filename=document.pdf');
-      res.send(detail.file); 
-    } catch (err) {
-      res.status(500).send("Error loading file");
-    }
-  };
+  try {
+    const detail = await DetailLayanan.findOne({
+        where: { id_detail: req.params.id }
+    });
+    if (!detail) return res.status(404).send("Not found");
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'inline; filename=document.pdf');
+    res.send(detail.file); 
+  } catch (err) {
+    res.status(500).send("Error loading file");
+  }
+};
   
 
 export const getDetailLayananById = async (req, res) => {
@@ -42,8 +44,8 @@ export const getDetailLayananById = async (req, res) => {
 
         const responseData = {
             ...detail.dataValues,
-            gambar: detail.file
-                ? `data:image/jpeg;base64,${detail.file.toString("base64")}`
+            file: detail.file
+                ? `data:application/pdf;base64,${detail.file.toString("base64")}`
                 : null,
         };
 
