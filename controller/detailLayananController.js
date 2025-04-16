@@ -62,11 +62,12 @@ export const createDetailLayanan = async (req, res) => {
             return res.status(400).json({ msg: "File PDF wajib diunggah" });
         }
 
-        const { judul } = req.body;
+        const { id_layanan, judul } = req.body;
 
         await DetailLayanan.create({
+            id_layanan: id_layanan,
             judul: judul,
-            file: req.file.filename, 
+            file: req.file.buffer,  
         });
 
         res.status(201).json({ msg: "Detail layanan berhasil dibuat" });
@@ -83,16 +84,18 @@ export const updateDetailLayanan = async (req, res) => {
             return res.status(404).json({ msg: "Detail tidak ditemukan" });
         }
 
-        let filename = detail.file;
+        const { judul } = req.body;
+        const fileBaru = req.file ? req.file.buffer : detail.file;
 
-        if (req.file) {
-            fileBaru = req.file.buffer; 
-        }
-
-        await DetailLayanan.update({ 
-            ...req.body, file: fileBaru },{ 
-            where: { id_detail: req.params.id } 
-        });
+        await DetailLayanan.update(
+            {
+                judul: judul,
+                file: fileBaru,
+            },
+            {
+                where: { id_detail: req.params.id },
+            }
+        );
 
         res.status(200).json({ msg: "Detail layanan diperbarui" });
     } catch (error) {
