@@ -4,8 +4,12 @@ import db from "../config/konek.js";
 const { DataTypes } = Sequelize
 
 const Admin = db.define('tb_admin',{
-    email: {
+    id_admin: {
         primaryKey: true,
+        autoIncrement: true,
+        type: DataTypes.INTEGER,
+    },
+    email: {
         type: DataTypes.STRING,
     },
     password: {

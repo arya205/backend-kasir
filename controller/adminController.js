@@ -10,6 +10,51 @@ export const getAdmin = async (req, res) => {
     }
 };
 
+export const createAdmin = async (req, res) => {
+    try {
+        response = await Admin.create(req.body)
+        res.status(200).json({ msg: "Admin Dibuat" })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateAdmin = async (req, res) => {
+    try {
+        const admin = await Admin.findByPk(req.params.id);
+        if (!admin) {
+            return res.status(404).json({ msg: "Admin tidak ditemukan" });
+        }
+
+        await Admin.update( req.body, { 
+            where: { id_admin: req.params.id } 
+        });
+
+        res.status(200).json({ msg: "Admin diperbarui" });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ msg: error.message });
+    }
+};
+
+export const deleteAdmin = async (req, res) => {
+    try {
+        const admin = await Admin.findByPk(req.params.id);
+        if (!admin) {
+            return res.status(404).json({ msg: "Admin tidak ditemukan" });
+        }
+ 
+        await Admin.destroy({
+            where: { id_admin: req.params.id },
+        });
+
+        res.status(200).json({ msg: "Admin dihapus" }); 
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ msg: error.message });
+    }
+};
+
 export const login = async (req, res) => {
     const { email, password } = req.body;
     try {

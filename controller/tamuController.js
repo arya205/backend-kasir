@@ -29,9 +29,7 @@ export const getTamuById = async (req, res) => {
 
 export const createTamu = async (req, res) => {
     try {
-
         await Tamu.create( req.body );
-
         res.status(201).json({ msg: "Tamu Dibuat" });
     } catch (error) {
         console.log(error.message);
