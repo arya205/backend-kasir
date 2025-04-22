@@ -13,7 +13,7 @@ const route = express.Router()
 route.get('/admin', getAdmin)
 route.get('/admin/:id', getAdminById)
 route.post('/admin', createAdmin)
-route.patch('/admin:id', updateAdmin)
+route.patch('/admin/:id', updateAdmin)
 route.delete('/admin/:id', deleteAdmin)
 route.post('/login', login)
 
