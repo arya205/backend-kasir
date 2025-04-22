@@ -10,6 +10,23 @@ export const getAdmin = async (req, res) => {
     }
 };
 
+export const getAdminById = async (req, res) => {
+    try {
+        const response = await Admin.findOne({
+            where: { id_admin: req.params.id }
+        });
+
+        if (!response) {
+            return res.status(404).json({ msg: "Admin tidak ditemukan" });
+        }
+
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ message: error.message });
+    }
+};
+
 export const createAdmin = async (req, res) => {
     try {
         response = await Admin.create(req.body)
