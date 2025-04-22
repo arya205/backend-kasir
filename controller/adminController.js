@@ -29,8 +29,8 @@ export const getAdminById = async (req, res) => {
 
 export const createAdmin = async (req, res) => {
     try {
-        response = await Admin.create(req.body)
-        res.status(200).json({ msg: "Admin Dibuat" })
+        await Admin.create(req.body)
+        res.status(201).json({ msg: "Admin Dibuat" })
     } catch (error) {
         console.log(error);
     }
