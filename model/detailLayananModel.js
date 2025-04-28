@@ -21,6 +21,9 @@ const DetailLayanan = db.define('tb_detail_layanan', {
     judul: {
         type: DataTypes.STRING, 
     },
+    deskripsi: {
+        type: DataTypes.TEXT, 
+    },
     file: {
         type: DataTypes.BLOB('long'), 
     },
